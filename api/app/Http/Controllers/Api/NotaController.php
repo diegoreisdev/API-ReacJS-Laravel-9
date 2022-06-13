@@ -11,42 +11,31 @@ class NotaController extends Controller
     /* MÉTODO RESPONSÁVEL POR TRAZER TODAS AS ANOTAÇÕES */
     public function index()
     {
-        $notas = Nota::all();
-        return $notas;
+        return Nota::all();
     }
 
     /* MÉTODO RESPONSÁVEL POR SALVAR AS ANOTAÇÕES */
     public function store(Request $request)
     {
-        $nota = new Nota();
-        $nota->titulo = $request->titulo;
-        $nota->descricao = $request->descricao;
-
-        $nota->save();
+        return Nota::create($request->all());
     }
 
     /* MÉTODO RESPONSÁVEL POR EXIBIR TODAS AS ANOTAÇÕES */
     public function show($id)
     {
-        $nota = Nota::find($id);
-        return $nota;
+        return Nota::find($id);      
     }
 
     /* MÉTODO RESPONSÁVEL POR ATUALIZAR AS ANOTAÇÕES */
     public function update(Request $request, $id)
     {
-        $nota = Nota::findOrFail($request->id);
-        $nota->titulo = $request->titulo;
-        $nota->descricao = $request->descricao;
-
-        $nota->save();
-        return $nota;
+        $nota = Nota::find($id);
+        return $nota->update($request->all());
     }
 
     /* MÉTODO RESPONSÁVEL POR APAGAR AS ANOTAÇÕES */
     public function destroy($id)
     {
-       $nota = Nota::destroy($id);
-       return $nota;
+       return Nota::destroy($id);     
     }
 }
